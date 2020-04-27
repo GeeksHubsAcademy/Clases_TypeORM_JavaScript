@@ -4,6 +4,10 @@
    "port": 3307,
    "username": "geekshubs",
    "password": "geekshubs",
-   "database": "geekshubs_academy"
+   "database": "geekshubs_academy",
+   "synchronize": true,
+   "entities":[
+      "dist/entities/*.js"
+   ]
 }
 
