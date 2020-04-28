@@ -1,43 +1,25 @@
 import express from 'express';
-import { createConnection } from 'typeorm';
+import { getConnectionManager, createConnection, getCustomRepository } from 'typeorm';
 import { User } from './entities/User';
+import { UserRepository } from './repositories/userRepository';
 
 const app = express();
 app.use(express.json);
 
-createConnection()
-.then(async connection=>{
-    console.log("Conectado");
-    const user = new User();
-    user.firstName="Juan";
-    user.lastName="Pérez";
-    user.isActive=false;
 
-    const userRepository = await connection.getRepository("user");
-    //Obtenemos todos los registros.
-    const users= await userRepository.find();
-    console.log("Uusarios" , users);
-    //Obtenemos un registro podemos indicar us id.
-    const userOne = await userRepository.findOne(6);
-    console.log("Un unico usuario" , userOne);
-    //Obtenemos los registros que cumpla unas condiciones.
-    const usersActive = await userRepository.find({isActive:false});
-    console.log("Usuarios inactivos",usersActive);
-    //Obtener todos los registros y el número total.
-    const [allUsers, numberUsers] = await userRepository.findAndCount();
-    console.log("Usuarios:",allUsers);
-    console.log("Número total de usuarios", numberUsers);
-    //Obtener usuarios ordenados por id desc
-    const usersOrderById = await userRepository.find({order:{id:"DESC"}});
-    console.log("Usuarios ordenados de forma descednete", usersOrderById);
+const repo = async ()=>{
+const connection = await createConnection();
+const userRepository = new getCustomRepository(UserRepository);
+const userCreated = await userRepository.createUser("xavi","rodriguez",true);
+console.log("Usuario Creado", userCreated);
+const user = await userRepository.findByName("Xavi");
+console.log("Usuario recuperado", user);
+const userMod = await userRepository.updateName(2,"pepe");
+console.log("Usuario modificado", userMod)
+console.log("Eliminado", await userRepository.deleteUser(1));
+}
 
-
-    connection.manager
-        .save(user)
-        .then(user=>console.log("Usuario creado"+user.id))
-        .catch(error=>console.error(error));
-    
-}).catch(error=>console.error(error));
+repo();
 
 app.listen(3000, () => {
     console.log('Ready on port 3000!');

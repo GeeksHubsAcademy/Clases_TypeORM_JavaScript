@@ -1,4 +1,5 @@
-{
+ [{
+   "name":"default",
    "type": "mysql",
    "host": "localhost",
    "port": 3307,
@@ -9,5 +10,5 @@
    "entities":[
       "dist/entities/*.js"
    ]
-}
+ }]
 
