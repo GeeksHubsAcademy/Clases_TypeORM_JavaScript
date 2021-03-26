@@ -7,7 +7,7 @@
     "dev": "babel src --out-dir dist && nodemon dist/index.js",
     "build": "tsc",
     "test": "echo \"Error: no test specified\" && exit 1",
-    "typeorm":"node ./node_modules/typeorm/cli.js $*"
+    "typeorm": "node ./node_modules/typeorm/cli.js $*"
   },
   "author": "geekshubsAcademy",
   "license": "ISC",

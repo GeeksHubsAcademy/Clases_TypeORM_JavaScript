@@ -1,0 +1,30 @@
+{
+    "compilerOptions": {
+      "outDir": "dist/migrations",
+      "target": "es5",
+      "sourceMap": true,
+      "lib": [
+        "es5",
+        "es6",
+        "dom"
+      ],
+      "types": [
+        "reflect-metadata",
+        "node"
+      ],
+      "module": "commonjs",
+      "moduleResolution": "node",
+      "experimentalDecorators": true,
+      "emitDecoratorMetadata": true,
+      "noUnusedLocals": true,
+      "noImplicitAny": false
+    },
+    "include": [
+      "src/**/*.ts"
+    ],
+    "exclude": [
+      "dist",
+      "src/**/*.spec.ts",
+      "node_modules"
+    ]
+  }
